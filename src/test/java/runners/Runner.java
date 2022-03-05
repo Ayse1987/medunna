@@ -12,8 +12,8 @@ import org.junit.runner.RunWith;
                 "rerun:target/failedRerun.txt"
         },
         features = "./src/test/resources/features",
-        glue = {"stepdefinitions","Hooks"},
-        tags = "@excel_login",
+        glue = {"stepdefinitions", "hooks"},
+        tags = "@UIRegistration",
         dryRun = false
 )
 public class Runner {
