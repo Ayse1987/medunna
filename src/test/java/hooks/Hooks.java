@@ -1,16 +1,21 @@
-package Hooks;
+package hooks;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import utilities.ConfigurationReader;
 import utilities.Driver;
 
 public class Hooks {
     @Before
     public void setUp(){
 
+    }
+    @Before(order=1,value = "@UIRegistration")
+    public void navigateToRegistrationPage(){
+        Driver.getDriver().get(ConfigurationReader.getProperty("medunna_registration_url"));
     }
 
     @After
