@@ -27,15 +27,15 @@ public class RegistrationStepDef  {
     public void user_provides_firstname_and_lastname_and(String firstName, String lastName) {
         firstName=faker.name().firstName();
         lastName=faker.name().lastName();
-        registrant.setFirstname(firstName);
-        registrant.setLastname(lastName);
+        registrant.setFirstName(firstName);
+        registrant.setLastName(lastName);
         Driver.waitAndSendText(rp.firstnameTextBox,firstName);
         Driver.waitAndSendText(rp.lastnameTextBox,lastName);
 
     }
     @Then("user creates username {string}")
     public void user_creates_username(String userName) {
-        userName=registrant.getFirstname()+registrant.getLastname();
+        userName=registrant.getFirstName()+registrant.getLastName();
         Driver.waitAndSendText(rp.usernameTextBox,userName);
 
     }
@@ -64,6 +64,23 @@ public class RegistrationStepDef  {
     public void user_creates_the_records_to_a_correspondent_file() {
         WriteToTxt.saveRegistrantData(registrant);
 
-
     }
+    @Given("user provides the password {string}")
+    public void userProvidesThePassword(String password) {
+       Driver.waitAndSendText(rp.firstPasswordTextBox,password);
+    }
+    @Then("user validates the password strength {string}")
+    public void user_validates_the_password_strength(String level) {
+        if(1==Integer.parseInt(level)){
+            Assert.assertTrue(rp.passwordStrength1.isDisplayed());
+
+        }else if(2==Integer.parseInt(level)){
+            Assert.assertTrue(rp.passwordStrength2.isDisplayed());
+        }else if (3==Integer.parseInt(level)){
+            Assert.assertTrue(rp.passwordStrength3.isDisplayed());
+
+        }
+    }
+
+
 }

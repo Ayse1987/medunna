@@ -12,3 +12,18 @@ Feature: Test all registrant data
     Examples: test data
       |SSN|firstname|lastname|username|email|password|
       |384-37-3827|Irfan|Pishkin|irfanpish|irfan@gmail.com|asdfA123.|
+
+  @UIRegistration
+    Scenario Outline: test password strength
+    Given user provides the password "<password>"
+    Then user validates the password strength "<strength>"
+    Examples:
+      | password | strength |
+    |asdkfkfjs | 1       |
+    |asdkfkfj?|2        |
+      |asdkfkfj?1|3        |
+
+
+
+
+
