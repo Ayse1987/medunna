@@ -1,0 +1,9 @@
+Registrant{firstName='Cherryl', lastName='Beer', ssn='718-03-0512', login='mose.kassulke', langKey='en', password='&hSyz354j^RJJ', email='janelle.johns@yahoo.com'}
+Registrant{firstName='Haywood', lastName='Welch', ssn='803-96-6237', login='alex.daugherty', langKey='en', password='r9!4bY3oASmU', email='reid.raynor@yahoo.com'}
+Registrant{firstName='Trevor', lastName='Bednar', ssn='144-49-7973', login='susy.robel', langKey='en', password='EnlAokMf', email='delma.stehr@hotmail.com'}
+Registrant{firstName='Keiko', lastName='Casper', ssn='492-13-4645', login='kris.dach', langKey='en', password='K1H04Z7O', email='jame.rath@gmail.com'}
+Registrant{firstName='Rudolph', lastName='Gorczany', ssn='742-82-0003', login='ronnie.rice', langKey='en', password='n%uphMzCd2c$0!', email='glenn.macejkovic@hotmail.com'}
+Registrant{firstName='Antonina', lastName='Mohr', ssn='381-28-6333', login='shan.jones', langKey='en', password='6Y3u0U9!w##*pD', email='jazmine.jaskolski@gmail.com'}
+Registrant{firstName='Tamisha', lastName='Shields', ssn='807-97-0397', login='sari.herman', langKey='en', password='8GK*dm!3', email='karina.brekke@gmail.com'}
+Registrant{firstName='Len', lastName='Hagenes', ssn='269-69-1667', login='nathalie.casper', langKey='en', password='2*RtfCj8b', email='renato.rolfson@yahoo.com'}
+Registrant{firstName='Dewitt', lastName='Kunde', ssn='236-07-7427', login='doreen.lebsack', langKey='en', password='A4V$C&$2n', email='sharon.jerde@hotmail.com'}
