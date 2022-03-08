@@ -10,18 +10,30 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.tr.Fakat;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
 import pojos.Registrant;
+
+import utilities.ApiUtils;
+import utilities.Authentication;
 import utilities.ConfigurationReader;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
+import static utilities.ApiUtils.getRequest;
+import static utilities.Authentication.generateToken;
 import static utilities.WriteToTxt.saveRegistrantData;
 
 public class RegistrantApiSteps {
     Registrant registrant = new Registrant();
     Faker faker = new Faker();
     Response response;
+    Registrant []registrants;
+
     @Given("user sets the necessary path params")
     public void user_sets_the_necessary_path_params() {
        Hooks.spec.pathParams("first", "api", "second", "register");
@@ -69,6 +81,62 @@ public class RegistrantApiSteps {
         Assert.assertEquals(registrant.getFirstName(),actualRegistrant.getFirstName());
         Assert.assertEquals(registrant.getSsn(),actualRegistrant.getSsn());
     }
+
+
+
+
+    @Given("user sends the get request for users data")
+    public void user_sends_the_get_request_for_users_data() {
+
+        response = getRequest(generateToken(), ConfigurationReader.getProperty("registrant_endpoint"));
+
+
+        /*
+    response=given().headers("Authorization","Bearer "+ Authentication.generateToken(),
+            "Content-Type", ContentType.JSON,"Accept", ContentType.JSON).
+            when().
+            get(ConfigurationReader.getProperty("registrant_endpoint"));
+
+   // response.prettyPrint();
+*/
+
+
+
+    }
+    @Given("user deserialized data to java")
+    public void user_deserialized_data_to_java() throws Exception {
+       // response.prettyPrint();
+
+        ObjectMapper obj=new ObjectMapper();
+
+        registrants = obj.readValue(response.asString(), Registrant[].class);
+        System.out.println(registrants.length);
+
+
+        //deserialization with jsonPath
+        /*
+        JsonPath json=response.jsonPath();
+        List<String>users=new ArrayList<>();
+        users=json.getList("firstName");
+        System.out.println(users.get(0));
+        */
+
+
+
+        for(int i=0; i<registrants.length; i++){
+            System.out.println("name "+ registrants[i].getFirstName());
+        }
+
+
+    }
+    @Given("user saves the users data to correspondent files")
+    public void user_saves_the_users_data_to_correspondent_files() {
+
+
+
+    }
+
+
 
 
 
