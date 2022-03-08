@@ -2,7 +2,7 @@
   Feature: Registrant api test
 
 
-    @apiRegistrant
+    #@ApiRegistrant
     Scenario Outline: registrant test
 
       Given user sets the necessary path params
@@ -16,6 +16,10 @@
         | Ali | Akyurt | 234-65-6543 | ali@gmail.com | aliakyurt | Ali123345, | en |
 
 
-      Scenario: api get request
+    @ApiRegistrant
+      Scenario: api get request for users (registrant)
         #given().headers("Authorization","Bearer "+ token, "Content-Type", ContentType.JSON,"Accept", ContentType.JSON).when().get(endpoint);
-        Given
+
+      Given user sends the get request for users data
+        And user deserialized data to java
+        And user saves the users data to correspondent files

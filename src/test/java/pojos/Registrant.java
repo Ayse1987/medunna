@@ -31,8 +31,10 @@ public class Registrant {
     private String langKey;
     private String password;
     private String email;
+
     public Registrant() {
     }
+
     public Registrant(String firstName, String lastName, String ssn, String login, String langKey, String password, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
