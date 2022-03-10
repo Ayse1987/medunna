@@ -28,15 +28,6 @@ Feature: Test all registrant data
 
 
 
-    #=========================================
-  Feature: US01 Registration should be available using SSN, Firstname and Lastname
-                There should be api and DB validation
-
-    Background:
-      Given go to medunna registration url "
-
-  Scenario: US01_TC01
-    Given
 
 
 

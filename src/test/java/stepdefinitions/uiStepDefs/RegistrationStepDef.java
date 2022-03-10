@@ -51,7 +51,7 @@ public class RegistrationStepDef  {
         password=faker.internet().password(8,20,true,true);
         registrant.setPassword(password);
         Driver.waitAndSendText(rp.firstPasswordTextBox,password);
-        Driver.waitAndSendText(rp.secondPasswordTextBox,password);
+        Driver.waitAndSendText(rp.confirmPasswordTextBox,password);
 
     }
     @Then("user registers and validates")
