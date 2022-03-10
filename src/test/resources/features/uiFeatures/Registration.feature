@@ -19,9 +19,24 @@ Feature: Test all registrant data
     Then user validates the password strength "<strength>"
     Examples:
       | password | strength |
-    |asdkfkfjs | 1       |
-    |asdkfkfj?|2        |
-      |asdkfkfj?1|3        |
+      |asdkfkfjs | 1        |
+      |asdkfkfj? | 2        |
+      |asdkfkfj?1| 3        |
+
+
+
+
+
+
+    #=========================================
+  Feature: US01 Registration should be available using SSN, Firstname and Lastname
+                There should be api and DB validation
+
+    Background:
+      Given go to medunna registration url "
+
+  Scenario: US01_TC01
+    Given
 
 
 
