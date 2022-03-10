@@ -1,6 +1,7 @@
 package stepdefinitions.uiStepDefs;
 
 import com.github.javafaker.Faker;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
@@ -51,7 +52,7 @@ public class RegistrationStepDef  {
         password=faker.internet().password(8,20,true,true);
         registrant.setPassword(password);
         Driver.waitAndSendText(rp.firstPasswordTextBox,password);
-        Driver.waitAndSendText(rp.secondPasswordTextBox,password);
+        Driver.waitAndSendText(rp.confirmPasswordTextBox,password);
 
     }
     @Then("user registers and validates")
@@ -83,4 +84,134 @@ public class RegistrationStepDef  {
     }
 
 
+    //-------------------------------------------------------------------
+
+    @Given("go to medunna registration url {string}")
+    public void goToMedunnaRegistrationUrl(String url) {
+        Driver.getDriver().get(url);
+
+
+    }
+
+    @Then("verify the SSN number is valid")
+    public void userVerifiesTheSSNNumberIsValid() {
+        rp.firstnameTextBox.click();
+
+        try {
+            Assert.assertFalse(rp.ssnInvalidMessage.isDisplayed());
+        }catch(Exception e){
+            Assert.assertTrue(true);
+        }
+
+    }
+
+    @And("leave the SSN box blank")
+    public void leaveTheSSNBoxBlank() {
+        rp.ssnTextBox.sendKeys("");
+
+    }
+
+    @Then("verify SSN required message is displayed")
+    public void verifySSNRequiredMessageIsDisplayed() {
+        rp.firstnameTextBox.click();
+        try {
+            Assert.assertTrue(rp.ssnRequiredMessage.isDisplayed());
+        }catch(Exception e){
+            Assert.assertTrue(false);
+        }
+    }
+
+    @And("enter nine digit SSN without - ssn {string}")
+    public void enterNineDigitSSNWithoutSsn(String ssn) {
+        rp.ssnTextBox.sendKeys(ssn);
+
+    }
+
+    @Then("verify the SSN invalid message is displayed")
+    public void verifyTheSSNInvalidMessageIsDisplayed() {
+        rp.firstnameTextBox.click();
+        try{
+            Assert.assertTrue(rp.ssnInvalidMessage.isDisplayed());
+        }catch(Exception e){
+            Assert.assertTrue(false);
+
+        }
+
+    }
+
+
+    @And("enter eight digit SSN {string}")
+    public void userShouldEnterEightDigitSSN(String ssn) {
+        rp.ssnTextBox.sendKeys(ssn);
+    }
+
+
+    @And("enter ten digit SSN {string}")
+    public void userShouldEnterTenDigitSSN(String ssn) {
+        rp.ssnTextBox.sendKeys(ssn);
+    }
+
+    @And("enter valid firstname {string}")
+    public void enterValidFirstname(String firstName) {
+        rp.firstnameTextBox.sendKeys(firstName);
+
+    }
+
+    @Then("verify first name is valid")
+    public void verifyFirstNameIsValid() {
+        rp.lastnameTextBox.click();
+        try {
+            Assert.assertFalse(rp.firstNameRequiredMessage.isDisplayed());
+        }catch(Exception e){
+            Assert.assertTrue(true);
+        }
+    }
+
+    @And("leave first name box blank")
+    public void leaveFirstNameBoxBlank() {
+        rp.firstnameTextBox.sendKeys("");
+    }
+
+    @Then("verify first name required message is displayed")
+    public void verifyFirstNameRequiredMessageIsDisplayed() {
+        rp.lastnameTextBox.click();
+        try {
+            Assert.assertTrue(rp.firstNameRequiredMessage.isDisplayed());
+        }catch(Exception e){
+            Assert.assertTrue(false);
+        }
+    }
+
+
+    @And("enter valid lastname {string}")
+    public void enterValidLastname(String lastName) {
+        rp.lastnameTextBox.sendKeys(lastName);
+
+    }
+
+    @Then("verify lastname is valid")
+    public void verifyLastnameIsValid() {
+        rp.usernameTextBox.click();
+        try{
+            Assert.assertFalse(rp.lastNameRequiredMessage.isDisplayed());
+        }catch(Exception e){
+            Assert.assertTrue(true);
+        }
+    }
+
+    @And("leave last name blank")
+    public void leaveLastNameBlank() {
+        rp.lastnameTextBox.sendKeys("");
+
+    }
+
+    @Then("verify last name required message is displayed")
+    public void verifyLastNameRequiredMessageIsDisplayed() {
+        rp.usernameTextBox.click();
+        try {
+            Assert.assertTrue(rp.lastNameRequiredMessage.isDisplayed());
+        }catch(Exception e){
+            Assert.assertTrue(false);
+        }
+    }
 }
