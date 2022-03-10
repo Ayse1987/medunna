@@ -25,7 +25,7 @@ public class RegistrationPage {
     @FindBy(id = "firstPassword")
     public WebElement firstPasswordTextBox;
     @FindBy(id = "secondPassword")
-    public WebElement secondPasswordTextBox;
+    public WebElement confirmPasswordTextBox;
     @FindBy(id = "register-submit")
     public WebElement registerButton;
     @FindBy(xpath = "//*[contains(text(),'Registration Saved')]")
