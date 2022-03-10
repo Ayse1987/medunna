@@ -40,4 +40,37 @@ public class RegistrationPage {
     @FindBy(xpath = "//*[@id='strengthBar']/li[contains(@style,'rgb(153, 255, 0)')]")
     public WebElement passwordStrength3;
 
+
+    //---------------------------------------------------------------
+
+
+    @FindBy(xpath = "//div[contains(text(),'Your SSN is invalid')]")
+    public WebElement ssnInvalidMessage;
+
+    @FindBy(xpath = "//div[contains(text(),'Your SSN is required.')]")
+    public WebElement ssnRequiredMessage;
+
+    @FindBy(xpath = "//div[contains(text(),'Your FirstName is required.')]")
+    public WebElement firstNameRequiredMessage;
+
+    @FindBy(xpath = "//div[contains(text(),'Your LastName is required.')]")
+    public WebElement lastNameRequiredMessage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
