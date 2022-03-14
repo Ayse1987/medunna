@@ -16,10 +16,9 @@ import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
 import pojos.Registrant;
 
-import utilities.ApiUtils;
-import utilities.Authentication;
-import utilities.ConfigurationReader;
+import utilities.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -132,10 +131,76 @@ public class RegistrantApiSteps {
     @Given("user saves the users data to correspondent files")
     public void user_saves_the_users_data_to_correspondent_files() {
 
-
+        WriteToTxt.saveAllRegistrantsData(registrants);
 
     }
 
 
 
+
+
+
+
+
+    //=====================================================
+
+    @Given("set all registrant info to response")
+    public void setAllRegistrantInfoToResponse() {
+        response = getRequest(generateToken(), ConfigurationReader.getProperty("registrant_endpoint"));
+        //response.prettyPrint();
+    }
+
+    @And("deserialize all registrant info to Java")
+    public void deserializeAllRegistrantInfoToJava() throws Exception {
+        ObjectMapper obj=new ObjectMapper();
+
+        registrants = obj.readValue(response.asString(), Registrant[].class);
+        System.out.println(registrants.length);
+
+        for(int i=0; i<registrants.length; i++){
+           // System.out.println("ssn "+ registrants[i].getSsn());
+        }
+
+
+    }
+
+    @And("save all registrant info to correspondent files")
+    public void saveAllRegistrantInfoToCorrespondentFiles() {
+        WriteToTxt.saveAllRegistrantsData(registrants);
+    }
+
+
+    @Then("validate registrants info contains {string}")
+    public void validateRegistrantsInfoContains(String expextedSSN) {
+
+        //List<String>currentData= ReadTxt.getAllRegistrantsInfo();
+       // System.out.println(currentData);
+
+        boolean flag=false;
+        for(int i=0; i<registrants.length; i++){
+           if(registrants[i].getSsn().equals(expextedSSN)){
+               //System.out.println("ok pass");
+               flag=true;
+               break;
+           }
+
+        }
+        Assert.assertTrue(flag);
+
+    }
+
+    @Then("user validates status code and api records")
+    public void userValidatesStatusCodeAndApiRecords() throws IOException {
+        response.then().statusCode(201);
+        response.prettyPrint();
+
+        ObjectMapper obj=new ObjectMapper();
+        //when we use objectMapper we need to use
+
+        Registrant actualRegistrant=obj.readValue(response.asString(),Registrant.class);
+        System.out.println(actualRegistrant);
+
+        Assert.assertEquals(registrant.getFirstName(),actualRegistrant.getFirstName());
+        Assert.assertEquals(registrant.getSsn(),actualRegistrant.getSsn());
+    }
 }

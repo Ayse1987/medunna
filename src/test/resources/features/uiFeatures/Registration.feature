@@ -87,7 +87,7 @@ Feature: Test all registrant data
     And leave first name box blank
     Then verify first name required message is displayed
 
-  @rf
+
   Scenario Outline: US01_TC08 valid lastname test
     Given go to medunna registration url "https://medunna.com/account/register"
     And enter valid lastname "<lastName>"
