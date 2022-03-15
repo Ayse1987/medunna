@@ -100,31 +100,19 @@ public class WriteToTxt {
     }
 
     //=========
-    public static void saveAllRegistrantsData(Registrant[] registrants){
-
+    public static void saveRegistrantsData(Registrant [] registrants){
         try{
-
-
-            FileWriter fileWriter = new FileWriter(ConfigurationReader.getProperty("all_registrants_filename"), true);
-
+            //src/resources/testdata/Registrantdata.txt
+            FileWriter fileWriter = new FileWriter(ConfigurationReader.getProperty("all_registrants_filename"), false);
             BufferedWriter writer = new BufferedWriter(fileWriter);
-
-
-            writer.append(registrants+"\n");
-
-            for(Object w: registrants) {
-                writer.append(w + ",\n");
+            for(int i=0; i< registrants.length;i++) {
+                writer.append(registrants[i].getFirstName()+","+ registrants[i].getLastName()+","+registrants[i].getSsn()+","+ registrants[i].getLogin()+","+registrants[i].getEmail()+ "\n");
             }
-
             writer.close();
-
-
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
-
 
 
 
