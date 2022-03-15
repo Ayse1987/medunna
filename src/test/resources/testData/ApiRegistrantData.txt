@@ -1,4 +1,0 @@
-Registrant{ssn='086-51-1148', firstname='Odis', lastname='Kihn', username='quinton.kshlerin', email='carylon.schimmel@gmail.com', password='rX#B76@!o', lan='en'}
-Registrant{createdBy='null', createdDate='null', email='carlos.kuhn@hotmail.com', firstName='Meggan', id=0, imageUrl='null', langKey='en', lastModifiedBy='null', lastModifiedDate='null', lastName='Rempel', login='null', ssn='470-39-6024', userName='stephen.treutel', password='x^R*67SjK2lV'}
-Registrant{createdBy='null', createdDate='null', email='bailey.christiansen@yahoo.com', firstName='Reggie', id=0, imageUrl='null', langKey='en', lastModifiedBy='null', lastModifiedDate='null', lastName='Feeney', login='null', ssn='639-02-8380', userName='eun.sporer', password='v5&cKt7#X$'}
-Registrant{firstName='Ma', lastName='Schmeler', ssn='263-23-5763', login='null', langKey='en', password='03S2MY&w@l@', email='wilford.hessel@yahoo.com'}

@@ -8,71 +8,42 @@ import java.util.List;
 public class ReadTxt {
 
 
-    public static List<String> getSSNIDs() {
-        List<String> list = new ArrayList<>();
-
-
-        try {
-
+    public static List<String> getSSNIDs(){
+        List <String > list = new ArrayList<>();
+        try{
             //identify file location
             FileReader fileReader = new FileReader(ConfigurationReader.getProperty("database_registrant_data"));
-
             //Read the records of the file in given location
             BufferedReader br = new BufferedReader(fileReader);
-
             String line = br.readLine();//856-45-6789,
-
-            while (line != null) {
-
+            while(line != null){
                 String ssn = line.split(",")[0];
                 list.add(ssn);
-
                 line = br.readLine();
-
             }
-
-
-        } catch (Exception e) {
-
+        }catch (Exception e){
             e.printStackTrace();
-
         }
-
         return list;
     }
 
-    public static List<String> getAllRegistrantsInfo() {
-        List<String> list = new ArrayList<>();
-
-
-        try {
-
+    public static List<String> getAPISSNIDs(){
+        List <String > list = new ArrayList<>();
+        try{
             //identify file location
             FileReader fileReader = new FileReader(ConfigurationReader.getProperty("all_registrants_filename"));
-
             //Read the records of the file in given location
             BufferedReader br = new BufferedReader(fileReader);
-
             String line = br.readLine();//856-45-6789,
-
-            while (line != null) {
-
-                String registrantsINFO = line.split(",")[0];
-                list.add(registrantsINFO);
-
+            while(line != null){
+                String ssn = line.split(",")[2];
+                list.add(ssn);
                 line = br.readLine();
-
             }
-
-
-        } catch (Exception e) {
-
+        }catch (Exception e){
             e.printStackTrace();
-
         }
-
         return list;
     }
-
-
 }
+
