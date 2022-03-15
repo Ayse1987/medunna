@@ -49,7 +49,7 @@ public class DoctorEditAppointmentStepDefs {
        for(int i=1;i<15;i++){
            if(Driver.getDriver().findElement(By.xpath("//tbody/tr["+i+"]/td[1]")).getText().contains(patientId)){
                Driver.wait(2);
-               Driver.getDriver().findElement(By.xpath("//tbody/tr["+i+"]/td[13]")).click();
+              Driver.waitAndClick( Driver.getDriver().findElement(By.xpath("//tbody/tr["+i+"]/td[13]")));
                break;
            }
        }
@@ -73,7 +73,7 @@ public class DoctorEditAppointmentStepDefs {
 
     }
 
-    @And("click save button")
+    @And("click save Button")
     public void clickSaveButton() {
         Driver.waitAndClick(dp.saveButton);
         Driver.wait(2);

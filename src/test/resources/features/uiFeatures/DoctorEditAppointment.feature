@@ -9,7 +9,7 @@
 
     Scenario Outline: US11_TC01 Doctor edit an existing appointment test
       And edit the appointment information: "<Anamnesis>", "<Treatment>", "<Diagnosis>", "<Prescription>", "<Description>"
-      And click save button
+      And click save Button
       And verify the appointment updated message
       Examples:
         | Anamnesis | Treatment | Diagnosis | Prescription | Description |
@@ -17,7 +17,7 @@
 
     Scenario Outline: US11_TC02 After editing the appointment doctor should see updated appointment
       And edit the appointment information: "<Anamnesis>", "<Treatment>", "<Diagnosis>", "<Prescription>", "<Description>"
-      And click save button
+      And click save Button
       And navigate back to my appointments page
       And verify the edited information of the patient appointment, patient id "18721"
       Examples:
@@ -28,7 +28,7 @@
 
     Scenario Outline: US11_TC03 Doctor should not be able to edit appointment without typing in Anamnesis field
       And edit the appointment information: "<Anamnesis>", "<Treatment>", "<Diagnosis>", "<Prescription>", "<Description>"
-      And click save button
+      And click save Button
       And verify appoitment can't be saved
       Examples:
         | Anamnesis | Treatment | Diagnosis | Prescription | Description |
@@ -37,7 +37,7 @@
 
     Scenario Outline: US11_TC04 Doctor should not be able to edit appointment without typing in Treatment field
       And edit the appointment information: "<Anamnesis>", "<Treatment>", "<Diagnosis>", "<Prescription>", "<Description>"
-      And click save button
+      And click save Button
       And verify appoitment can't be saved
       Examples:
         | Anamnesis | Treatment | Diagnosis | Prescription | Description |
@@ -46,7 +46,7 @@
 
     Scenario Outline: US11_TC05 Doctor should not be able to edit appointment without typing in Diagnosis field
       And edit the appointment information: "<Anamnesis>", "<Treatment>", "<Diagnosis>", "<Prescription>", "<Description>"
-      And click save button
+      And click save Button
       And verify appoitment can't be saved
       Examples:
         | Anamnesis | Treatment | Diagnosis | Prescription | Description |
@@ -55,7 +55,7 @@
     @test
     Scenario Outline: US11_TC06 Doctor should be able to edit appointment without editing prescription and description fields
       And edit the appointment information: "<Anamnesis>", "<Treatment>", "<Diagnosis>", "<Prescription>", "<Description>"
-      And click save button
+      And click save Button
       And verify the appointment updated message
       Examples:
         | Anamnesis | Treatment | Diagnosis | Prescription | Description |
