@@ -1,0 +1,3 @@
+Registrant{firstName='Moses', lastName='Keeling', ssn='139-24-6617', login='kurt.casper', langKey='en', password='A^Jr*2K0', email='seymour.hegmann@yahoo.com', id=0}
+Registrant{firstName='Gudrun', lastName='Durgan', ssn='376-64-2053', login='abel.doyle', langKey='en', password='nUZmk5kOf', email='sherlyn.damore@hotmail.com', id=0}
+Registrant{firstName='Chastity', lastName='Connelly', ssn='050-68-0196', login='null', langKey='null', password='zq0EV#Uug', email='tangela.trantow@yahoo.com', id=0}

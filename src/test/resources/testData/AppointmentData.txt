@@ -1,4 +1,0 @@
-Appointment{firstname='Smitham', lastname='null', ssn='833-92-4881', email='rosamond.dooley@yahoo.com', phoneNumber='(006) 405-3107 x5992', date='05-03-2022'}
-Appointment{firstname='Purdy', lastname='null', ssn='715-24-8467', email='edgardo.kohler@hotmail.com', phoneNumber='(395) 846-5211', date='05-06-2022'}
-Appointment{firstname='Schaden', lastname='null', ssn='038-79-8801', email='eve.strosin@hotmail.com', phoneNumber='576-753-4340', date='05-06-2022'}
-Appointment{firstname='Erdman', lastname='null', ssn='082-65-2915', email='scottie.raynor@gmail.com', phoneNumber='059.074.3933 x42103', date='05-06-2022'}

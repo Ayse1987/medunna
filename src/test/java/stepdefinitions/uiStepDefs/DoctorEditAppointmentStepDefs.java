@@ -49,7 +49,9 @@ public class DoctorEditAppointmentStepDefs {
        for(int i=1;i<15;i++){
            if(Driver.getDriver().findElement(By.xpath("//tbody/tr["+i+"]/td[1]")).getText().contains(patientId)){
                Driver.wait(2);
+
               Driver.waitAndClick( Driver.getDriver().findElement(By.xpath("//tbody/tr["+i+"]/td[13]")));
+
                break;
            }
        }
