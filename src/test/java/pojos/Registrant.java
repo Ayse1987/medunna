@@ -1,4 +1,5 @@
 package pojos;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -31,10 +32,11 @@ public class Registrant {
     private String langKey;
     private String password;
     private String email;
-
+    private int id;
+    private boolean activated;
+    private String [] authorities;
     public Registrant() {
     }
-
     public Registrant(String firstName, String lastName, String ssn, String login, String langKey, String password, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -86,6 +88,25 @@ public class Registrant {
     public void setEmail(String email) {
         this.email = email;
     }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public boolean isActivated() {
+        return activated;
+    }
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
+    public String[] getAuthorities() {
+        return authorities;
+    }
+    public void setAuthorities(String[] authorities) {
+        this.authorities = authorities;
+    }
+
     @Override
     public String toString() {
         return "Registrant{" +
@@ -96,6 +117,7 @@ public class Registrant {
                 ", langKey='" + langKey + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", id=" + id +
                 '}';
     }
 }
