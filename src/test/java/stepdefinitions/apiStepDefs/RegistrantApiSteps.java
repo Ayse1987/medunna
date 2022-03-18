@@ -197,7 +197,8 @@ public class RegistrantApiSteps {
         ObjectMapper obj=new ObjectMapper();
         //when we use objectMapper we need to use
 
-        Registrant actualRegistrant=obj.readValue(response.asString(),Registrant.class);
+        Registrant actualRegistrant=obj.readValue(response.asString(),
+                .class);
         System.out.println(actualRegistrant);
 
         Assert.assertEquals(registrant.getFirstName(),actualRegistrant.getFirstName());
