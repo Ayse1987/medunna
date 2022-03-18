@@ -39,9 +39,7 @@ public class RegistrationDBSteps {
 
             List<String> actualData = getSSNIDs();//All records
 
-            Assert.assertTrue(actualData.containsAll(expectedSSNIDs));
-
-
+            Assert.assertTrue(getSSNIDs().containsAll(expectedSSNIDs));
         }
 
 

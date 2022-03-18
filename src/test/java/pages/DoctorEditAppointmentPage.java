@@ -48,7 +48,9 @@ public class DoctorEditAppointmentPage {
     @FindBy(id = "save-entity")
     public WebElement saveButton;
 
+
     @FindBy(xpath ="//div[contains(text(),'Appointment is updated')]" )
+
     public WebElement appointmentUpdatedMessage;
 
     @FindBy(xpath = "//div[contains(text(),'This field is required.')]")

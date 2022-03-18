@@ -1,8 +1,8 @@
 package stepdefinitions.apiStepDefs;
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
-import hooks.Hooks;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,36 +10,40 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.tr.Fakat;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
 import pojos.Registrant;
-
-import utilities.*;
+import utilities.ConfigurationReader;
+import utilities.ReadTxt;
+import utilities.WriteToTxt;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import static io.restassured.RestAssured.given;
+import static junit.framework.TestCase.assertEquals;
 import static utilities.ApiUtils.getRequest;
 import static utilities.Authentication.generateToken;
+import static utilities.ReadTxt.getAPISSNIDs;
+import static utilities.ReadTxt.getSSNIDs;
 import static utilities.WriteToTxt.saveRegistrantData;
+import static hooks.Hooks.spec;
+import static utilities.WriteToTxt.saveRegistrantsData;
 
-public class RegistrantApiSteps {
+public class RegistrantApiSteps  {
     Registrant registrant = new Registrant();
     Faker faker = new Faker();
     Response response;
     Registrant []registrants;
-
     @Given("user sets the necessary path params")
     public void user_sets_the_necessary_path_params() {
-       Hooks.spec.pathParams("first", "api", "second", "register");
-
+        spec.pathParams("first", "api", "second", "register");
     }
-    @And("user sets the expected data {string} , {string} {string} {string} , {string} ,{string} , {string}")
-    public void userSetsTheExpectedData(String firstname, String lastname, String ssn, String email, String username, String password, String lan) {
+    @Given("user sets the expected data {string}, {string} {string} {string} {string} {string} and {string}")
+    public void user_sets_the_expected_data_and(String firstname, String lastname, String ssn, String email, String username, String password, String lan) {
         firstname = faker.name().firstName();
         lastname = faker.name().lastName();
         ssn = faker.idNumber().ssnValid();
@@ -53,87 +57,129 @@ public class RegistrantApiSteps {
         registrant.setLogin(username);
         registrant.setPassword(password);
         registrant.setLangKey(lan);
+//        Map<String ,Object> expectedData = new HashMap<>();
+//        expectedData.put("firstName", firstname);
     }
-
-    @And("user sends the request and gets the response")
-    public void userSendsTheRequestAndGetsTheResponse() {
-       //RequestSpecification spec = new RequestSpecBuilder().setBaseUri("https://medunna.com").build();
-       //Hooks.spec.pathParams("first", "api", "second", "register");
-        response = given().spec(Hooks.spec).contentType(ContentType.JSON).body(registrant).when().post("/{first}/{second}");
+    @Given("user sends the POST request and gets the response")
+    public void user_sends_the_post_request_and_gets_the_response() {
+        response = given().spec(spec).contentType(ContentType.JSON).body(registrant).when().post("/{first}/{second}");
     }
-
     @When("user saves the api records to correspondent files")
     public void user_saves_the_api_records_to_correspondent_files() {
         saveRegistrantData(registrant);
     }
     @Then("user validates api records")
-    public void user_validates_api_records() throws Exception {
+    public void user_validates_api_records() throws  Exception{
         response.then().statusCode(201);
         response.prettyPrint();
-
-        ObjectMapper obj=new ObjectMapper();
-        //when we use objectMapper we need to use
-
-        Registrant actualRegistrant=obj.readValue(response.asString(),Registrant.class);
+        ObjectMapper obj = new ObjectMapper();
+        Registrant actualRegistrant = obj.readValue(response.asString(), Registrant.class);
         System.out.println(actualRegistrant);
-
-        Assert.assertEquals(registrant.getFirstName(),actualRegistrant.getFirstName());
-        Assert.assertEquals(registrant.getSsn(),actualRegistrant.getSsn());
+        assertEquals(registrant.getFirstName(), actualRegistrant.getFirstName());
+        assertEquals(registrant.getLastName(), actualRegistrant.getLastName());
+        assertEquals(registrant.getSsn(), actualRegistrant.getSsn());
     }
-
-
-
-
     @Given("user sends the get request for users data")
     public void user_sends_the_get_request_for_users_data() {
-
         response = getRequest(generateToken(), ConfigurationReader.getProperty("registrant_endpoint"));
-
-
+        //This can be also used
         /*
-    response=given().headers("Authorization","Bearer "+ Authentication.generateToken(),
-            "Content-Type", ContentType.JSON,"Accept", ContentType.JSON).
-            when().
-            get(ConfigurationReader.getProperty("registrant_endpoint"));
-
-   // response.prettyPrint();
-*/
-
-
-
+        response = given().headers(
+                "Authorization",
+                "Bearer " + token,
+                "Content-Type",
+                ContentType.JSON,
+                "Accept",
+                ContentType.JSON).when().get(endpoint);
+         */
     }
-    @Given("user deserialized data to java")
-    public void user_deserialized_data_to_java() throws Exception {
-       // response.prettyPrint();
-
-        ObjectMapper obj=new ObjectMapper();
-
+    @Given("user deserializes data to Java")
+    public void user_deserializes_data_to_java()throws Exception {
+//        response.prettyPrint();
+        ObjectMapper obj = new ObjectMapper();
+//
         registrants = obj.readValue(response.asString(), Registrant[].class);
-        System.out.println(registrants.length);
-
-
-        //deserialization with jsonPath
-        /*
-        JsonPath json=response.jsonPath();
-        List<String>users=new ArrayList<>();
-        users=json.getList("firstName");
-        System.out.println(users.get(0));
-        */
-
-
-
-        for(int i=0; i<registrants.length; i++){
-            System.out.println("name "+ registrants[i].getFirstName());
-        }
-
-
+//        System.out.println(registrants.length);
+//        for (int i=0; i< registrants.length; i++){
+//            System.out.println("name"+registrants[i].getFirstName());
+//        }
     }
     @Given("user saves the users data to correspondent files")
     public void user_saves_the_users_data_to_correspondent_files() {
-
-        WriteToTxt.saveAllRegistrantsData(registrants);
-
+        List<String> expectedData = getSSNIDs();
+        saveRegistrantsData(registrants);
+        List<String> actualSSNIDs = getAPISSNIDs();
+        List<String > checkList = new ArrayList<>();
+        for(int i=actualSSNIDs.size()-1; i>= actualSSNIDs.size()-500;i--){
+            checkList.add(actualSSNIDs.get(i));//10 records
+        }
+        System.out.println(actualSSNIDs);
+        Assert.assertTrue(expectedData.containsAll(checkList));
+        System.out.println(checkList);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -166,16 +212,30 @@ public class RegistrantApiSteps {
 
     @And("save all registrant info to correspondent files")
     public void saveAllRegistrantInfoToCorrespondentFiles() {
-        WriteToTxt.saveAllRegistrantsData(registrants);
+        WriteToTxt.saveRegistrantsData(registrants);
     }
 
 
     @Then("validate registrants info contains {string}")
     public void validateRegistrantsInfoContains(String expextedSSN) {
 
-        //List<String>currentData= ReadTxt.getAllRegistrantsInfo();
+        List<String>actualSSNIDs= ReadTxt.getAPISSNIDs();//from api
+        List<String>expectedSSNIDs=ReadTxt.getSSNIDs(); //from database
        // System.out.println(currentData);
 
+        List<String >checkList=new ArrayList<>();
+
+        for(int i=100; i<110; i++){
+            checkList.add(expectedSSNIDs.get(i));
+        }
+
+        System.out.println(checkList);
+        System.out.println(actualSSNIDs);
+
+
+        Assert.assertTrue(actualSSNIDs.containsAll(checkList));
+
+        /*
         boolean flag=false;
         for(int i=0; i<registrants.length; i++){
            if(registrants[i].getSsn().equals(expextedSSN)){
@@ -186,7 +246,7 @@ public class RegistrantApiSteps {
 
         }
         Assert.assertTrue(flag);
-
+         */
     }
 
     @Then("user validates status code and api records")
