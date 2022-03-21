@@ -1,6 +1,7 @@
 
-  Feature: Registrant api test
+Feature: Registrant api test
 
+  @smoke
 @ApiRegistrant
     Scenario Outline: registrant test
 

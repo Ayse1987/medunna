@@ -50,7 +50,6 @@ public class DoctorEditAppointmentPage {
 
 
     @FindBy(xpath ="//div[contains(text(),'Appointment is updated')]" )
-
     public WebElement appointmentUpdatedMessage;
 
     @FindBy(xpath = "//div[contains(text(),'This field is required.')]")

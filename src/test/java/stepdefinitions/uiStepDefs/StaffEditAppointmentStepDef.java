@@ -16,6 +16,7 @@ import java.util.stream.IntStream;
 public class StaffEditAppointmentStepDef {
     StaffEditAppointmentPage sp=new StaffEditAppointmentPage();
     Actions action=new Actions(Driver.getDriver());
+    Random random=new Random();
 
     @And("navigate to search patient page")
     public void navigateToSearchPatientPage() {
@@ -65,7 +66,6 @@ public class StaffEditAppointmentStepDef {
     @And("select any current doctor from physician dropdown")
     public void selectAnyCurrentDoctorFromPhysicianDropdown() {
         Driver.waitAndClick(sp.physicianDropdown);
-        Random random=new Random();
         int index=random.nextInt(sp.physicianList.size())+1;
 //        if(index==0){
 //            index=random.nextInt(sp.physicianList.size());
