@@ -56,8 +56,8 @@ Feature: Test all registrant data
     And enter eight digit SSN "<ssn>"
     Then verify the SSN invalid message is displayed
     Examples:
-      | ssn       |
-      |45823698   |
+      |   ssn     |
+      | 45823698  |
       |342-25-968 |
 
 
@@ -66,7 +66,7 @@ Feature: Test all registrant data
     And enter ten digit SSN "<ssn>"
     Then verify the SSN invalid message is displayed
     Examples:
-          | ssn       |
+          | ssn         |
           |4582369810   |
           |342-25-96825 |
 
@@ -93,7 +93,7 @@ Feature: Test all registrant data
     And enter valid lastname "<lastName>"
     Then verify lastname is valid
     Examples:
-      | lastName   |
+      |lastName     |
       |Can          |
       |1234567      |
       |Can123       |
