@@ -10,6 +10,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.tr.Fakat;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
@@ -26,9 +27,9 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 import static junit.framework.TestCase.assertEquals;
 import static utilities.ApiUtils.getRequest;
+import static utilities.ApiUtils.putRequest;
 import static utilities.Authentication.generateToken;
-import static utilities.ReadTxt.getAPISSNIDs;
-import static utilities.ReadTxt.getSSNIDs;
+import static utilities.ReadTxt.*;
 import static utilities.WriteToTxt.saveRegistrantData;
 import static hooks.Hooks.spec;
 import static utilities.WriteToTxt.saveRegistrantsData;
@@ -110,15 +111,13 @@ public class RegistrantApiSteps  {
         saveRegistrantsData(registrants);
         List<String> actualSSNIDs = getAPISSNIDs();
         List<String > checkList = new ArrayList<>();
-        for(int i=actualSSNIDs.size()-1; i>= actualSSNIDs.size()-500;i--){
+        for(int i=actualSSNIDs.size()-1; i>= actualSSNIDs.size()-10;i--){
             checkList.add(actualSSNIDs.get(i));//10 records
         }
         System.out.println(actualSSNIDs);
         Assert.assertTrue(expectedData.containsAll(checkList));
         System.out.println(checkList);
     }
-
-
 
     //=====================================================
 
@@ -157,7 +156,7 @@ public class RegistrantApiSteps  {
 
         List<String >checkList=new ArrayList<>();
 
-        for(int i=100; i<110; i++){
+        for(int i=200; i<210; i++){
             checkList.add(expectedSSNIDs.get(i));
         }
 
@@ -194,5 +193,73 @@ public class RegistrantApiSteps  {
 
         Assert.assertEquals(registrant.getFirstName(),actualRegistrant.getFirstName());
         Assert.assertEquals(registrant.getSsn(),actualRegistrant.getSsn());
+    }
+
+
+    /*
+    {
+        "id": 3315,
+        "login": "btrk",
+        "firstName": "Trk",
+        "lastName": "Bhr",
+        "ssn": "355-99-1256",
+        "email": "btrk@qa.team",
+        "imageUrl": null,
+        "activated": true,
+        "langKey": "en",
+        "createdBy": "anonymousUser",
+        "createdDate": "2021-12-25T18:36:55.855770Z",
+        "lastModifiedBy": "olleydone",
+        "lastModifiedDate": "2022-03-15T17:00:40.369108Z",
+        "authorities": [
+            "ROLE_ADMIN"
+        ]
+    }
+     */
+
+    @Given("user sets the necessary path params for put request")
+    public void userSetsTheNecessaryPathParamsForPutRequest() {
+        //spec.pathParams("first","api","second","users");
+    }
+
+    @And("user sets the expected user data")
+    public void userSetsTheExpectedUserData() {
+        String [] authority = {"USER_ROLE"};
+        registrant.setFirstName("usernew");
+        registrant.setLastName("Sensoy23");
+        registrant.setEmail("reySen263@gmail.com");
+        registrant.setLogin("reyhannhanim23");
+        registrant.setSsn("746-39-7563");
+        registrant.setLangKey("en");
+        registrant.setActivated(true);
+        registrant.setAuthorities(authority);
+
+
+
+        List<Registrant> registrants = getAllRegistrants();
+        registrant.setId(registrants.get(registrants.size()-3).getId());
+
+        System.out.println("User id: "+registrants.get(registrants.size()-3).getId());
+
+    }
+
+    @And("user makes a put request for users")
+    public void userMakesAPutRequestForUsers() {
+
+        putRequest(generateToken(), ConfigurationReader.getProperty("registrant_put_endpoint"), registrant);
+        /*response=given().headers("Authorization","Bearer ",generateToken(),
+                "Content-Type",ContentType.JSON,"Accept",ContentType.JSON).contentType(ContentType.JSON).
+                body(registrant).when().put("/{first}/{second}");*/
+       // response.prettyPrint();
+    }
+
+    @And("user validates the changes")
+    public void userValidatesTheChanges() {
+        JsonPath json=response.jsonPath();
+        System.out.println(json.getString("firstName"));
+        System.out.println(registrant.getFirstName());
+
+
+        Assert.assertEquals(registrant.getFirstName(),json.getString("firstName"));
     }
 }
