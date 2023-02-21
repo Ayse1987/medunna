@@ -17,9 +17,10 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Driver {
-    //create a driver instance
+    //create a driver instanceg
     private static WebDriver driver;
     private static int timeout = 5;
+
 
     //What?=>It is just to create, initialize the driver instance.(Singleton driver)
     //Why?=>We don't want to create and initialize the driver when we don't need
@@ -53,6 +54,7 @@ public class Driver {
         }
 //        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
+
         return driver;
     }
 

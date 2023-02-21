@@ -43,3 +43,18 @@
       Examples: api test data
         | firstname | lastname | SSN | email | username | password | lan |
         | Adnan | Arslan | 234-65-7579 | adnan01@gmail.com | adnan02 | Adnan01. | en |
+
+    @ApiRegistrant
+    Scenario: update existing users
+      Given user sets the necessary path params for put request
+      And user sets the expected user data
+      And user makes a put request for users
+      And user validates the changes
+
+
+    @ApiRegistrant
+    Scenario: delete existing user
+      Given
+
+
+

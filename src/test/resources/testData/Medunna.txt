@@ -1,3 +1,6 @@
 Registrant{firstName='Moses', lastName='Keeling', ssn='139-24-6617', login='kurt.casper', langKey='en', password='A^Jr*2K0', email='seymour.hegmann@yahoo.com', id=0}
 Registrant{firstName='Gudrun', lastName='Durgan', ssn='376-64-2053', login='abel.doyle', langKey='en', password='nUZmk5kOf', email='sherlyn.damore@hotmail.com', id=0}
 Registrant{firstName='Chastity', lastName='Connelly', ssn='050-68-0196', login='null', langKey='null', password='zq0EV#Uug', email='tangela.trantow@yahoo.com', id=0}
+Registrant{firstName='Harold', lastName='Hauck', ssn='718-48-1487', login='kirby.cormier', langKey='en', password='clUJpCKXHz0q', email='peter.hoeger@yahoo.com', id=0}
+Registrant{firstName='Odell', lastName='Franecki', ssn='030-65-3746', login='robin.kulas', langKey='en', password='480pZC&8Za2', email='cedrick.parker@yahoo.com', id=0}
+Registrant{firstName='Stephanie', lastName='Grimes', ssn='818-56-3593', login='tony.jacobs', langKey='en', password='V*#B6k459', email='gerald.leannon@gmail.com', id=0}

@@ -7,7 +7,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.List;
 
-public class WriteToTxt {
+public class
+WriteToTxt {
 
 
 
@@ -104,14 +105,24 @@ public class WriteToTxt {
         try{
             //src/resources/testdata/Registrantdata.txt
             FileWriter fileWriter = new FileWriter(ConfigurationReader.getProperty("api_all_registrant_data"), false);
+
             BufferedWriter writer = new BufferedWriter(fileWriter);
+
+
             for(int i=0; i< registrants.length;i++) {
-                writer.append(registrants[i].getFirstName()+","+ registrants[i].getLastName()+","+registrants[i].getSsn()+","+ registrants[i].getLogin()+","+registrants[i].getEmail()+ "\n");
+                writer.append(registrants[i].getFirstName()+","+ registrants[i].getLastName()+","+registrants[i].getSsn()+","+ registrants[i].getLogin()+
+                        ","+ registrants[i].getId()+","+registrants[i].getEmail()+ "\n");
             }
+
             writer.close();
+
+
+
         }catch (Exception e){
             e.printStackTrace();
         }
+
+
     }
 
 
