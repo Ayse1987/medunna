@@ -75,7 +75,7 @@ public class DoctorEditAppointmentStepDefs {
 
     }
 
-    @And("click save Button")
+    @And("click save button")
     public void clickSaveButton() {
         Driver.waitAndClick(dp.saveButton);
         Driver.wait(2);

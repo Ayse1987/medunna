@@ -55,7 +55,7 @@ public class StaffEditAppointmentPage {
     @FindBy(id = "save-entity")
     public WebElement saveButton;
 
-    @FindBy(xpath ="//div[contains(text(),'The Appointment is updated with identifier')]" )
+    @FindBy(xpath ="//div[contains(text(),'Appointment is updated')]" )
     public WebElement appointmentUpdatedMessage;
 
     @FindBy(id = "appointment-status")
